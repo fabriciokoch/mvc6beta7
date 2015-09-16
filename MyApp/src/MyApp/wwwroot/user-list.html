@@ -1,0 +1,31 @@
+﻿<section id="calculadora">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2 class="section-heading">Users</h2>
+        <hr class="primary">
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-hover table-responsive table-striped">
+          <thead>
+            <tr>
+              <th>Edit</th>
+              <th>UserName</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in vm.Users">
+              <td style="width: 1%;">
+                <input class="btn btn-xs btn-primary " value="Edit" ng-click="vm.userDetails(user.Id)"  />
+              </td>
+              <td>{{user.UserName}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

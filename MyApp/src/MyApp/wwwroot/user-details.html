@@ -1,0 +1,43 @@
+﻿<section id="calculadora">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2 class="section-heading">{{vm.User.UserName}} details</h2>
+        <hr class="primary">
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-4">
+        <form name="vm.form" novalidate ng-submit="vm.addClaim()" class="form-inline">
+          <div class="form-group">
+            <label for="newclaim">New Claim</label>&nbsp;
+            <input id="newclaim" autofocus name="newclaim" type="text" class="form-control" ng-model="vm.NewClaim" required />
+          </div>
+          <input type="submit" class="btn btn-primary" value="Add" ng-disabled="vm.form.$invalid" />
+        </form>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-hover table-responsive table-striped">
+          <thead>
+            <tr>
+              <th>Remove</th>
+              <th>Claim</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="claim in vm.User.Claims">
+              <td style="width: 1%;">
+                <input class="btn btn-xs btn-danger " value="Remove" ng-click="vm.remove(claim.ClaimValue)" />
+              </td>
+              <td>{{claim.ClaimValue}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
