@@ -30,6 +30,15 @@
       $location.path('/Users/' + id);
     };
 
+    vm.addUser = function () {
+      $http.post('/api/users/new/' + vm.NewUser.UserName + '/' + vm.NewUser.Password).
+      then(function (response) {
+        vm.selectUsers();
+      }, function (response) {
+        console.log(response);
+      });
+    };
+
     vm.selectUsers();
   }
 })();

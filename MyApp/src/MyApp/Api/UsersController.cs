@@ -38,11 +38,20 @@ namespace MyApp.Api {
 
     // POST api/values
     [HttpPost("{userId}/{claimName}")]
-    public async Task<ApplicationUser> Post(string userId, string claimName) {
+    public async Task<ApplicationUser> AddClaim(string userId, string claimName) {
       var user = _dbContext.Users.Include(u => u.Claims).Where(u => u.Id == userId).FirstOrDefault();
       await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, claimName));
       _dbContext.SaveChanges();
       return user;
+    }
+
+    // POST api/values
+    [HttpPost("new/{userName}/{password}")]
+    public async Task Post(string userName, string password) {
+      ApplicationUser newUser = new ApplicationUser();
+      newUser.UserName = userName;
+      var result = await _userManager.CreateAsync(newUser, password);
+      _dbContext.SaveChanges();
     }
 
     // DELETE api/values/5

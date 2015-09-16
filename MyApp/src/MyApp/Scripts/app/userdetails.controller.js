@@ -5,9 +5,9 @@
       .module('app')
       .controller('UserDetailsController', UserDetailsController);
 
-  UserDetailsController.$inject = ['$http', '$routeParams'];
+  UserDetailsController.$inject = ['$http', '$routeParams', '$location'];
 
-  function UserDetailsController($http, $routeParams) {
+  function UserDetailsController($http, $routeParams, $location) {
     var vm = this;
 
     vm.getUser = function (userId) {
@@ -39,6 +39,10 @@
         vm.getUser($routeParams.id);
       }, function (response) {
       });
+    };
+
+    vm.back = function () {
+      $location.path('/');
     };
 
     vm.getUser($routeParams.id);
