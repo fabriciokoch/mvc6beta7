@@ -10,6 +10,7 @@ using Microsoft.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNet.Http;
 
 namespace MyApp {
   public class Startup {
@@ -33,6 +34,12 @@ namespace MyApp {
     public void Configure(IApplicationBuilder app) {
       app.UseStaticFiles();
       app.UseIdentity();
+      app.UseCookieAuthentication(options =>
+      {
+        options.LoginPath = new PathString("/account/login");
+        options.AutomaticAuthentication = true;
+        options.AuthenticationScheme = "Cookies";
+      });
       app.UseMvc(routes => {
         routes.MapRoute(
             name: "default",

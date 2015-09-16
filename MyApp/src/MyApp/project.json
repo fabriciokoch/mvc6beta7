@@ -9,7 +9,7 @@
     "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-beta7",
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta7",
-    "Microsoft.AspNet.Security.Cookies": "1.0.0-beta3",
+    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta7",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
     "Microsoft.AspNet.StaticFiles": "1.0.0-beta7",

@@ -41,6 +41,11 @@ namespace MyApp.Api {
     public async Task<ApplicationUser> AddClaim(string userId, string claimName) {
       var user = _dbContext.Users.Include(u => u.Claims).Where(u => u.Id == userId).FirstOrDefault();
       await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, claimName));
+      if(user.UserName == User.Identity.Name) {
+        IList<Claim> claims = new List<Claim>();
+        claims.Add(new Claim(ClaimTypes.Role, claimName));
+        User.AddIdentity(new ClaimsIdentity(claims));
+      }
       _dbContext.SaveChanges();
       return user;
     }
