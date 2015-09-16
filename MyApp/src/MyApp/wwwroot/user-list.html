@@ -18,7 +18,7 @@
             <label for="password">Password</label>&nbsp;
             <input id="password" autofocus name="password" type="password" class="form-control" ng-model="vm.NewUser.Password" required />
           </div>
-          <input type="submit" class="btn btn-primary" value="Add" ng-disabled="vm.form.$invalid" />
+          <input type="submit" class="btn btn-primary" value="Add" ng-disabled="vm.form.$invalid || !vm.canAdd" />
         </form>
       </div>
     </div>

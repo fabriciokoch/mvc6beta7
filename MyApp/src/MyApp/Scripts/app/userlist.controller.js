@@ -5,10 +5,11 @@
       .module('app')
       .controller('UserListController', UserListController);
 
-  UserListController.$inject = ['$http', '$location'];
+  UserListController.$inject = ['$http', '$location', 'canAdd'];
 
-  function UserListController($http, $location) {
+  function UserListController($http, $location, canAdd) {
     var vm = this;
+    vm.canAdd = canAdd;
     vm.Users = [];
     vm.Error = '';
 
