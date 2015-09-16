@@ -10,8 +10,10 @@
   function UserListController($http, $location) {
     var vm = this;
     vm.Users = [];
+    vm.Error = '';
 
     vm.selectUsers = function () {
+      vm.Error = '';
       var req = {
         method: 'GET',
         url: '/api/users',
@@ -22,7 +24,7 @@
       $http(req).success(function (data, status, headers, config) {
         vm.Users = data;
       }).error(function (data, status, headers, config) {
-        console.log(data);
+        vm.Error = 'Could not get users.';
       });
     };
 
@@ -31,14 +33,20 @@
     };
 
     vm.addUser = function () {
+      vm.Error = '';
       $http.post('/api/users/new/' + vm.NewUser.UserName + '/' + vm.NewUser.Password).
       then(function (response) {
+        console.log('ok');
+        console.log(response);
         vm.selectUsers();
       }, function (response) {
+        console.log('error');
         console.log(response);
+        vm.Error = 'Could not add User.';
       });
     };
 
     vm.selectUsers();
   }
 })();
+

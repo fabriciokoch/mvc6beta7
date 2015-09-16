@@ -11,15 +11,16 @@
       <div class="col-md-4">
         <form name="vm.form" novalidate ng-submit="vm.addClaim()" >
           <div class="form-group">
-            <label for="newclaim">New Claim</label>&nbsp;
+            <label for="newclaim">New Claim</label>&nbsp;<span class="text-info">* Works on next login.</span>
             <input id="newclaim" autofocus name="newclaim" type="text" class="form-control" ng-model="vm.NewClaim" required />
           </div>
           <input type="button" class="btn btn-link" value="Back" ng-click="vm.back()" />
           <input type="submit" class="btn btn-primary" value="Add" ng-disabled="vm.form.$invalid" />
-          <span class="text-danger">* Works on next login.</span>
+          
         </form>
       </div>
     </div>
+    <span class="text-danger" ng-show="vm.Error.length > 0">{{vm.Error}}</span>
     <br />
     <div class="row">
       <div class="col-md-12">

@@ -8,6 +8,7 @@ using Microsoft.Data.Entity;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Authorization;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,6 +39,7 @@ namespace MyApp.Api {
 
     // POST api/values
     [HttpPost("{userId}/{claimName}")]
+    [Authorize(Roles = "CanAdd")]
     public async Task<ApplicationUser> AddClaim(string userId, string claimName) {
       var user = _dbContext.Users.Include(u => u.Claims).Where(u => u.Id == userId).FirstOrDefault();
       await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, claimName));
@@ -50,17 +52,22 @@ namespace MyApp.Api {
       return user;
     }
 
-    // POST api/values
+    // POST api/values    
     [HttpPost("new/{userName}/{password}")]
-    public async Task Post(string userName, string password) {
+    [Authorize(Roles = "CanAdd")]
+    public async Task<IActionResult> Post(string userName, string password) {
       ApplicationUser newUser = new ApplicationUser();
       newUser.UserName = userName;
       var result = await _userManager.CreateAsync(newUser, password);
+      if (!result.Succeeded)
+        return HttpNotFound();
       _dbContext.SaveChanges();
+      return Ok();
     }
 
     // DELETE api/values/5
     [HttpDelete("{userId}/{claimName}")]
+    [Authorize(Roles = "CanRemove")]
     public async Task Delete(string userId, string claimName) {
       var user = _dbContext.Users.Include(u => u.Claims).Where(u => u.Id == userId).FirstOrDefault();
       await _userManager.RemoveClaimAsync(user, new Claim(ClaimTypes.Role, claimName));

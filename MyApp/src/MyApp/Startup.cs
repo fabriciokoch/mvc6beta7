@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNet.Http;
+using System.Collections.Generic;
 
 namespace MyApp {
   public class Startup {
@@ -55,10 +56,18 @@ namespace MyApp {
         int users = await c.Users.CountAsync();
         if (users < 1) {
           var userManager = applicationServices.GetService<UserManager<ApplicationUser>>();
+          IList<Claim> claims = new List<Claim>();
+          claims.Add(new Claim(ClaimTypes.Role, "CanAdd"));
+          claims.Add(new Claim(ClaimTypes.Role, "CanRemove"));
+
           ApplicationUser newUser = new ApplicationUser();
           newUser.UserName = "admin";
-          await userManager.CreateAsync(newUser, "Admin1!");
-          await userManager.AddClaimAsync(newUser, new Claim(ClaimTypes.Role,"Admin"));
+          await userManager.CreateAsync(newUser, "Admin1!");          
+          await userManager.AddClaimsAsync(newUser, claims);
+
+          ApplicationUser newUser2 = new ApplicationUser();
+          newUser2.UserName = "simpleuser";
+          await userManager.CreateAsync(newUser2, "Simpleuser1!");
           c.SaveChanges();
         }
         
