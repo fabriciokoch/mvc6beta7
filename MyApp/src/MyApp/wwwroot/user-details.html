@@ -15,7 +15,7 @@
             <input id="newclaim" autofocus name="newclaim" type="text" class="form-control" ng-model="vm.NewClaim" required />
           </div>
           <input type="button" class="btn btn-link" value="Back" ng-click="vm.back()" />
-          <input type="submit" class="btn btn-primary" value="Add" ng-disabled="vm.form.$invalid" />
+          <input type="submit" class="btn btn-primary" value="Add" ng-disabled="vm.form.$invalid || !vm.canAdd" />
           
         </form>
       </div>
@@ -34,7 +34,7 @@
           <tbody>
             <tr ng-repeat="claim in vm.User.Claims">
               <td style="width: 1%;">
-                <input class="btn btn-xs btn-danger " value="Remove" ng-click="vm.remove(claim.ClaimValue)" />
+                <input class="btn btn-xs btn-danger " value="Remove" ng-disabled="!vm.canRemove" ng-click="vm.remove(claim.ClaimValue)" />
               </td>
               <td>{{claim.ClaimValue}}</td>
             </tr>

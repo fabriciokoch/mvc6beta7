@@ -5,11 +5,14 @@
       .module('app')
       .controller('UserDetailsController', UserDetailsController);
 
-  UserDetailsController.$inject = ['$http', '$routeParams', '$location'];
+  UserDetailsController.$inject = ['$http', '$routeParams', '$location', 'canAdd', 'canRemove'];
 
-  function UserDetailsController($http, $routeParams, $location) {
+  function UserDetailsController($http, $routeParams, $location, canAdd, canRemove) {
     var vm = this;
+    vm.canAdd = canAdd;
+    vm.canRemove = canRemove;    
     vm.Error = '';
+
     vm.getUser = function (userId) {
       vm.Error = '';
       var req = {

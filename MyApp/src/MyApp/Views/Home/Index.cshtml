@@ -13,10 +13,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
   <script src="app.js"></script>
+  
   <script>
+    angular.module("app").value("canAdd", @ViewBag.CanAdd);
+    angular.module("app").value("canRemove", @ViewBag.CanRemove);
   </script>
 </head>
 <body>
+  <a href="/account/signout" target="_self">sign out</a>
   <ng-view></ng-view>
 </body>
 </html>

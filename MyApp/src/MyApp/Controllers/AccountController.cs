@@ -54,6 +54,11 @@ namespace MyApp.Controllers {
       }
     }
 
+    public IActionResult SignOut() {
+      _signInManager.SignOutAsync();
+      return Redirect("/Account/Login");
+    }
+
     // GET: /<controller>/
     public IActionResult Index() {
       return View();
